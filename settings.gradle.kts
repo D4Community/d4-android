@@ -15,4 +15,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "D4 Community"
 include(":app")
- 
+include(":core:datastore")
+include(":core:common")
+include(":data:home")
+include(":feature:home")
