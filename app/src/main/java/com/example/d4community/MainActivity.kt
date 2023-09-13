@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
                     navController,
                     MAIN_NAVIGATION_AUTH
                 ) {
-                    authNavigation()
+                    authNavigation(this@MainActivity)
                 }
             }
         }

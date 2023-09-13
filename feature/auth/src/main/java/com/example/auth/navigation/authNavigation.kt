@@ -1,6 +1,7 @@
 package com.example.auth.navigation
 
 import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -23,7 +24,7 @@ fun NavController.navigateToAuth(navOptions: NavOptions? = null) {
     this.navigate(MAIN_NAVIGATION_AUTH, navOptions)
 }
 
-fun NavGraphBuilder.authNavigation() {
+fun NavGraphBuilder.authNavigation(activity: ComponentActivity) {
     composable(route = MAIN_NAVIGATION_AUTH) {
         val context = LocalContext.current
         val scope = rememberCoroutineScope()
@@ -63,6 +64,19 @@ fun NavGraphBuilder.authNavigation() {
                 }
             ) {
                 Text("Phone")
+            }
+            Button(
+                onClick = {
+                    scope.launch {
+                        account.createOAuth2Session(
+                            activity = activity,
+                            provider = "google"
+                        )
+                        Log.d(TAG, "authNavigation: ${account.get()}")
+                    }
+                }
+            ) {
+                Text("Google")
             }
         }
     }
