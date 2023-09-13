@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 
 const val MAIN_NAVIGATION_AUTH = "main_navigation_auth"
 const val TAG = "AUTH"
+
 fun NavController.navigateToAuth(navOptions: NavOptions? = null) {
     this.navigate(MAIN_NAVIGATION_AUTH, navOptions)
 }
@@ -49,6 +50,19 @@ fun NavGraphBuilder.authNavigation() {
                 }
             ) {
                 Text("E-mail")
+            }
+            Button(
+                onClick = {
+                    scope.launch {
+                        val token = account.createPhoneSession(
+                            userId = ID.unique(),
+                            phone = "+911234567890"
+                        )
+                        Log.d(TAG, "authNavigation: $token")
+                    }
+                }
+            ) {
+                Text("Phone")
             }
         }
     }
