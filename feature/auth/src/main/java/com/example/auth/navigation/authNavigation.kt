@@ -1,20 +1,17 @@
 package com.example.auth.navigation
 
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import io.appwrite.Client
-import io.appwrite.ID
-import io.appwrite.services.Account
+import com.example.auth.vm.AuthViewModel
 import kotlinx.coroutines.launch
 
 const val MAIN_NAVIGATION_AUTH = "main_navigation_auth"
@@ -24,29 +21,17 @@ fun NavController.navigateToAuth(navOptions: NavOptions? = null) {
     this.navigate(MAIN_NAVIGATION_AUTH, navOptions)
 }
 
-fun NavGraphBuilder.authNavigation(activity: ComponentActivity) {
+fun NavGraphBuilder.authNavigation() {
     composable(route = MAIN_NAVIGATION_AUTH) {
         val context = LocalContext.current
         val scope = rememberCoroutineScope()
-        val client = remember {
-            Client(context)
-                .setEndpoint("https://cloud.appwrite.io/v1")
-                .setProject("64f95cfebf8d4953f7a6")
-        }
-        val account = remember {
-            Account(client)
-        }
+        val authViewModel: AuthViewModel = hiltViewModel()
 
         Row {
             Button(
                 onClick = {
                     scope.launch {
-                        val user = account.create(
-                            userId = ID.unique(),
-                            email = "email@example.com",
-                            password = "password"
-                        )
-                        Log.d(TAG, "authNavigation: $user")
+                        authViewModel.loginWithEmail("email@example.com", "password")
                     }
                 }
             ) {
@@ -55,11 +40,7 @@ fun NavGraphBuilder.authNavigation(activity: ComponentActivity) {
             Button(
                 onClick = {
                     scope.launch {
-                        val token = account.createPhoneSession(
-                            userId = ID.unique(),
-                            phone = "+911234567890"
-                        )
-                        Log.d(TAG, "authNavigation: $token")
+                        authViewModel.loginWithPhone("+91234567890")
                     }
                 }
             ) {
@@ -68,11 +49,7 @@ fun NavGraphBuilder.authNavigation(activity: ComponentActivity) {
             Button(
                 onClick = {
                     scope.launch {
-                        account.createOAuth2Session(
-                            activity = activity,
-                            provider = "google"
-                        )
-                        Log.d(TAG, "authNavigation: ${account.get()}")
+                        authViewModel.loginWithGoogle(context as ComponentActivity)
                     }
                 }
             ) {
