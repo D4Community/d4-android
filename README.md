@@ -42,3 +42,5 @@ Please go through the [Contribution guidelines](/CONTRIBUTING.md) file before st
 Thanks to all these amazing contributors for providing value to this project.
 
 <img src="https://contrib.rocks/image?repo=D4Community/d4-android"/>
+
+Show your support by giving a Star🌟
