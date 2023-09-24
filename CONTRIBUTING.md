@@ -6,7 +6,7 @@ Thank you for your interest in contributing to **D4-android** To ensure a positi
 <h3>Coding Guidelines</h3>
 
 While starting to work on a new functionality or improving an existing one, make sure to follow these rules...
-1. Check the D4-android roadmap if you want to start working on a new functionality.
+1. Check the D4-android [roadmap](https://docs.google.com/spreadsheets/d/1uD93oYKea3MFwNi3qm5N93Nz9slwvXI-Hta9WFbYSwk/edit?usp=sharing) if you want to start working on a new functionality.
 2. We are using AppWrite as our one and only BaaS, so before starting to work on a new functionality make sure you discuss with maintainers regarding the data present in AppWrite.
 3. You should follow the [recommended](https://developer.android.com/topic/modularization) Android App modularization guidelines with MVVM architecture.
 ![1_sample_dep_graph](https://github.com/D4Community/d4-android/assets/85388413/41079fed-cc97-43a8-82b5-754d131f7d53)
