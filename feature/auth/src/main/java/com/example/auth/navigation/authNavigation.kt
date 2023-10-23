@@ -21,18 +21,18 @@ fun NavGraphBuilder.authNavigation() {
     composable(route = MAIN_NAVIGATION_AUTH) {
         val authViewModel: AuthViewModel = hiltViewModel()
         val loginState by authViewModel.loginState.collectAsStateWithLifecycle()
-        AuthScreen(loginState = loginState) {
-            when (it) {
+        AuthScreen(loginState = loginState) { authUiEvent ->
+            when (authUiEvent) {
                 is AuthUiEvent.LoginWithEmail -> {
-                    authViewModel.loginWithEmail(it.email, it.password)
+                    authViewModel.loginWithEmail(authUiEvent.email, authUiEvent.password)
                 }
 
                 is AuthUiEvent.LoginWithPhone -> {
-                    authViewModel.loginWithPhone(it.phone)
+                    authViewModel.loginWithPhone(authUiEvent.phone)
                 }
 
                 is AuthUiEvent.LoginWithGoogle -> {
-                    authViewModel.loginWithGoogle(it.activity)
+                    authViewModel.loginWithGoogle(authUiEvent.activity)
                 }
             }
         }
