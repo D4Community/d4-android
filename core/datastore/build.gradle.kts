@@ -45,6 +45,9 @@ protobuf {
                 register("java") {
                     option("lite")
                 }
+                register("kotlin") {
+                    option("lite")
+                }
             }
         }
     }
@@ -60,6 +63,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //datastore
+    implementation("androidx.datastore:datastore-core:1.0.0")
     implementation("androidx.datastore:datastore:1.0.0")
     implementation("com.google.protobuf:protobuf-kotlin-lite:3.24.2")
 
