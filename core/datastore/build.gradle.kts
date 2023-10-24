@@ -42,7 +42,7 @@ protobuf {
     generateProtoTasks {
         all().forEach { task ->
             task.builtins {
-                register("kotlin") {
+                register("java") {
                     option("lite")
                 }
             }
