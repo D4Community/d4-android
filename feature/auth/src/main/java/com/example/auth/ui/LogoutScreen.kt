@@ -8,20 +8,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.auth.util.AuthUiEvent
-import com.example.common.utils.UiState
 import io.appwrite.models.Account
 
 @Composable
-fun LogoutScreen(loginState: UiState<Account>, onUiEvent: (AuthUiEvent) -> Unit) {
-    if (loginState is UiState.Success) {
-        Column {
-            Text(modifier = Modifier.padding(16.dp), text = loginState.data.name)
-            Text(modifier = Modifier.padding(16.dp), text = loginState.data.email)
-            Text(modifier = Modifier.padding(16.dp), text = loginState.data.phone)
+fun LogoutScreen(userAccount: Account, onUiEvent: (AuthUiEvent) -> Unit) {
+    Column {
+        Text(modifier = Modifier.padding(16.dp), text = userAccount.name)
+        Text(modifier = Modifier.padding(16.dp), text = userAccount.email)
+        Text(modifier = Modifier.padding(16.dp), text = userAccount.phone)
 
-            Button(onClick = { onUiEvent(AuthUiEvent.Logout) }) {
-                Text(text = "Logout")
-            }
+        Button(onClick = { onUiEvent(AuthUiEvent.Logout) }) {
+            Text(text = "Logout")
         }
     }
 }

@@ -8,6 +8,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.appwrite.Client
 import io.appwrite.services.Account
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -23,4 +26,12 @@ object CommonModule {
     @Provides
     @Singleton
     fun provideAppwriteAccountService(client: Client) = Account(client)
+
+    @Provides
+    @IODispatcher
+    fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 }
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class IODispatcher

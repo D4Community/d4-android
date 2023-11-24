@@ -1,6 +1,5 @@
 package com.example.auth.navigation
 
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -22,16 +21,9 @@ fun NavController.navigateToAuth(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.authNavigation() {
     composable(route = MAIN_NAVIGATION_AUTH) {
         val authViewModel: AuthViewModel = hiltViewModel()
-        val loginState by authViewModel.loginState.collectAsStateWithLifecycle()
-        val isAuth by authViewModel.isAuth.collectAsStateWithLifecycle()
-        LaunchedEffect(
-            key1 = Unit,
-            block = {
-                authViewModel.isAuthenticated()
-            }
-        )
+        val userAccount by authViewModel.userAccount.collectAsStateWithLifecycle()
 
-        if (!isAuth) {
+        if (userAccount == null) {
             AuthScreen { authUiEvent ->
                 when (authUiEvent) {
                     is AuthUiEvent.LoginWithEmail -> {
@@ -52,7 +44,7 @@ fun NavGraphBuilder.authNavigation() {
                 }
             }
         } else {
-            LogoutScreen(loginState = loginState) {
+            LogoutScreen(userAccount = userAccount!!) {
                 when (it) {
                     is AuthUiEvent.Logout -> authViewModel.logout()
                     else -> {}

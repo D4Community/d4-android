@@ -4,11 +4,8 @@ import androidx.activity.ComponentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.auth.repo.AuthRepo
-import com.example.common.utils.UiState
+import com.example.common.utils.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.appwrite.models.Account
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,16 +15,7 @@ class AuthViewModel
     private val authRepo: AuthRepo
 ) : ViewModel() {
 
-    private val _loginState = MutableStateFlow<UiState<Account>>(UiState.Idle)
-    val loginState = _loginState.asStateFlow()
-
-    private val _isAuth = MutableStateFlow(false)
-    val isAuth = _isAuth.asStateFlow()
-
-
-    fun isAuthenticated() = viewModelScope.launch {
-        _isAuth.value = authRepo.isAuthenticated()
-    }
+    val userAccount = authRepo.userAccount
 
     fun loginWithEmail(email: String, password: String) = viewModelScope.launch {
         authRepo.loginWithEmail(email, password)
@@ -42,7 +30,11 @@ class AuthViewModel
     }
 
     fun logout() = viewModelScope.launch {
-        authRepo.logout()
+        authRepo.logout().collect {
+            if (it is ResponseState.Success) {
+                userAccount.value = null
+            }
+        }
     }
 
 }
