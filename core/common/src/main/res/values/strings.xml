@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">D4 Community</string>
+    <string name="unknown_error">Unknown error occured</string>
+    <string name="sign_out_failed">Sign out failed</string>
 </resources>

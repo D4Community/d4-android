@@ -21,8 +21,12 @@ class AuthViewModel
     private val _loginState = MutableStateFlow<UiState<Account>>(UiState.Idle)
     val loginState = _loginState.asStateFlow()
 
+    private val _isAuth = MutableStateFlow(false)
+    val isAuth = _isAuth.asStateFlow()
+
+
     fun isAuthenticated() = viewModelScope.launch {
-        authRepo.isAuthenticated()
+        _isAuth.value = authRepo.isAuthenticated()
     }
 
     fun loginWithEmail(email: String, password: String) = viewModelScope.launch {
@@ -35,6 +39,10 @@ class AuthViewModel
 
     fun loginWithGoogle(activity: ComponentActivity) = viewModelScope.launch {
         authRepo.loginWithGoogle(activity)
+    }
+
+    fun logout() = viewModelScope.launch {
+        authRepo.logout()
     }
 
 }
