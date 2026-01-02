@@ -1,12 +1,12 @@
-# d4 Android
-Android app for the D4 Community that helps in keeping engagement with members and keeps them updated for the latest community updates/events.
+# D4 Android
+Android app for the D4 Community that helps in keeping engagement with members and keeps them updated on the latest community updates/events.
 
 ## Installation
 
 1. Fork the repo
-2. Import the fork into your Android studio.
+2. Import the fork into your Android Studio.
 3. Build the project.
-4. Wait for the gradle build...
+4. Wait for the Gradle build...
 5. Keep waiting...
 6. Launch the project
 
@@ -28,7 +28,7 @@ Android app for the D4 Community that helps in keeping engagement with members a
 1. The app module should only interact with feature modules
 2. The feature modules should ONLY interact with required data modules, use HILT for injections.
 3. The data modules can use any core module for their requirements.
-4. The feature modules can use any core module instead of the Datastore module which should be integrated with the data layer only.
+4. The feature modules can use any core module instead of the Datastore module, which should be integrated with the data layer only.
 
 
 ## Contributing
