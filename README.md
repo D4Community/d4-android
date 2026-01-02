@@ -1,4 +1,4 @@
-# d4-android
+# d4 Android
 Android app for the D4 Community that helps in keeping engagement with members and keeps them updated for the latest community updates/events.
 
 ## Installation
